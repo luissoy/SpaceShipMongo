@@ -29,6 +29,12 @@ public class SpaceshipController {
                 body(spaceshipService.getOne(id));
     }
 
+    @GetMapping("names/{name}")
+    public ResponseEntity<?> getAllByName(@PathVariable("name") String name, Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK).
+                body(spaceshipService.getAllByName(name, pageable));
+    }
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody SpaceshipDto spaceshipDto) throws DataAutoIdException {
         return ResponseEntity.status(HttpStatus.CREATED).
