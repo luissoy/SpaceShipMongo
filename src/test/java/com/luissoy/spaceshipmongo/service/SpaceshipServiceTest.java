@@ -104,6 +104,51 @@ class SpaceshipServiceTest {
     }
 
     @Test
+    void getAllByName() {
+        // Given
+        List<Spaceship> spaceshipsList = new ArrayList<>();
+        spaceshipsList.add(new Spaceship(1L, "Spaceship1"));
+        spaceshipsList.add(new Spaceship(2L, "Spaceship2"));
+        spaceshipsList.add(new Spaceship(3L, "Spaceship3"));
+
+        PageRequest pageRequest = PageRequest.of(0, 10);
+
+        Page<Spaceship> spaceshipsPage = new PageImpl<>(spaceshipsList, pageRequest, spaceshipsList.size());
+
+        String name = "Spaceship";
+
+        // When
+        when(spaceshipRepository.findByNameContaining(name, pageRequest)).thenReturn(spaceshipsPage);
+
+        // Then
+        PageResponse<Spaceship> retrievedSpaceships = spaceshipService.getAllByName("Spaceship", pageRequest);
+        assertEquals(3, retrievedSpaceships.getSize());
+        assertEquals(1, retrievedSpaceships.getPages());
+        assertEquals(3, retrievedSpaceships.getCollection().size());
+    }
+
+    @Test
+    void getAllByName_NoContent() {
+        // Given
+        List<Spaceship> spaceshipsList = new ArrayList<>();
+
+        PageRequest pageRequest = PageRequest.of(0, 10);
+
+        Page<Spaceship> spaceshipsPage = new PageImpl<>(spaceshipsList, pageRequest, spaceshipsList.size());
+
+        String name = "Spaceship";
+
+        // When
+        when(spaceshipRepository.findByNameContaining(name, pageRequest)).thenReturn(spaceshipsPage);
+
+        // Then
+        PageResponse<Spaceship> retrievedSpaceships = spaceshipService.getAllByName("Spaceship", pageRequest);
+        assertEquals(0, retrievedSpaceships.getSize());
+        assertEquals(0, retrievedSpaceships.getPages());
+        assertEquals(0, retrievedSpaceships.getCollection().size());
+    }
+
+    @Test
     @SneakyThrows
     void save_EmptyDb() {
         // Given
