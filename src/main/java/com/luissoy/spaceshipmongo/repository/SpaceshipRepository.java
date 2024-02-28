@@ -10,7 +10,5 @@ import java.util.List;
 
 @Repository
 public interface SpaceshipRepository extends MongoRepository<Spaceship, Long> {
-    List<Spaceship> findByNameContaining(String name);
-
     Page<Spaceship> findByNameContaining(String name, Pageable pageable);
 }
