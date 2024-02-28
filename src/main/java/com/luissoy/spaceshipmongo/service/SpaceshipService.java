@@ -35,6 +35,10 @@ public class SpaceshipService {
         }
     }
 
+    public PageResponse<Spaceship> getAllByName(String name, Pageable pageable) {
+        return new PageResponse<>(spaceshipRepository.findByNameContaining(name, pageable));
+    }
+
     public Spaceship save(SpaceshipDto dto) throws DataAutoIdException {
         Long id = autoIncrement();
         Spaceship spaceship = new Spaceship(id, dto);
