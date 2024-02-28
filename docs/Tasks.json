@@ -1,0 +1,32 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Ping endpoint for test connection."
+    },
+    {
+      "id": 2,
+      "name": "Create the docker files for the application and for the database."
+    },
+    {
+      "id": 3,
+      "name": "Develop the model, dto and repository."
+    },
+    {
+      "id": 4,
+      "name": "Develop the tests for service (Controller test is out of scope)."
+    },
+    {
+      "id": 5,
+      "name": "Develop the service and controller."
+    },
+    {
+      "id": 6,
+      "name": "Develop the service tests, service and controller for get by name."
+    },
+    {
+      "id": 7,
+      "name": "Documentation."
+    }
+  ]
+}
